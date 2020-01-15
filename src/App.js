@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { createContext } from 'react';
 import './App.css';
 import ISSLocation from './components/ISSLocation';
+
+const ISSContext = createContext();
 
 function App() {
   return (
