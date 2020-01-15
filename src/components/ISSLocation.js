@@ -22,17 +22,16 @@ class ISSLocation extends Component {
   }
 
   render() {
-    const {
-      error,
-      isFetching,
-      latitude,
-      longitude,
-    } = this.props;
-    const isLocationPresent = latitude && longitude;
-
     return (
       <ISSContext.Consumer>
-        {(context) => {
+        {({
+          error,
+          isFetching,
+          latitude,
+          longitude,
+        }) => {
+          const isLocationPresent = latitude && longitude;
+
           return (
             <div>
               <div className="map">
@@ -41,7 +40,7 @@ class ISSLocation extends Component {
                   defaultWidth={700}
                   height={450}
                   minZoom={1}
-                  maxZoom={8}
+                  maxZoom={20}
                   zoom={1}
                 >
                   {!isFetching && isLocationPresent && <Marker anchor={[latitude, longitude]} />}
