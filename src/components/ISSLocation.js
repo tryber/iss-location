@@ -5,18 +5,18 @@ import Marker from 'pigeon-marker';
 import ISSContext from '../context/ISSContext';
 
 class ISSLocation extends Component {
-  componentDidMount() {
-    const { getCurrentISSLocation } = this.props;
+  // componentDidMount() {
+  //   const { getCurrentISSLocation } = this.props;
 
-    this.timer = setInterval(
-      getCurrentISSLocation,
-      2000,
-    );
-  }
+  //   this.timer = setInterval(
+  //     getCurrentISSLocation,
+  //     2000,
+  //   );
+  // }
 
-  componentWillUnmount() {
-    clearInterval(this.timer);
-  }
+  // componentWillUnmount() {
+  //   clearInterval(this.timer);
+  // }
 
   render() {
     return (
