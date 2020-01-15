@@ -12,12 +12,10 @@ function App() {
   };
 
   return (
-    <ISSContext.Provider value={contextValue}>
-      <div className="App">
-        <h1>International Space Station Location Tracker</h1>
-        <ISSLocation />
-      </div>
-    </ISSContext.Provider>
+    <div className="App">
+      <h1>International Space Station Location Tracker</h1>
+      <ISSLocation />
+    </div>
   );
 }
 
