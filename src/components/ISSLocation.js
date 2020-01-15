@@ -5,6 +5,7 @@ import Map from 'pigeon-maps';
 import Marker from 'pigeon-marker';
 
 import { fetchISSLocation } from '../actions';
+import ISSContext from '../context/ISSContext';
 
 class ISSLocation extends Component {
   componentDidMount() {
@@ -30,23 +31,29 @@ class ISSLocation extends Component {
     const isLocationPresent = latitude && longitude;
 
     return (
-      <div>
-        <div className="map">
-          <Map
-            center={[0, 0]}
-            defaultWidth={700}
-            height={450}
-            minZoom={1}
-            maxZoom={8}
-            zoom={1}
-          >
-            {!isFetching && isLocationPresent && <Marker anchor={[latitude, longitude]} />}
-          </Map>
-        </div>
-        {isFetching && 'Loading...'}
-        {!isFetching && isLocationPresent && `Current ISS location: latitude = ${latitude}, longitude = ${longitude}`}
-        {!isFetching && error}
-      </div>
+      <ISSContext.Consumer>
+        {(context) => {
+          return (
+            <div>
+              <div className="map">
+                <Map
+                  center={[0, 0]}
+                  defaultWidth={700}
+                  height={450}
+                  minZoom={1}
+                  maxZoom={8}
+                  zoom={1}
+                >
+                  {!isFetching && isLocationPresent && <Marker anchor={[latitude, longitude]} />}
+                </Map>
+              </div>
+              {isFetching && 'Loading...'}
+              {!isFetching && isLocationPresent && `Current ISS location: latitude = ${latitude}, longitude = ${longitude}`}
+              {!isFetching && error}
+            </div>
+          );
+        }}
+      </ISSContext.Consumer>
     );
   }
 }

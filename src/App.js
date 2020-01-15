@@ -1,16 +1,7 @@
-import React, { createContext } from 'react';
+import React from 'react';
 import './App.css';
 import ISSLocation from './components/ISSLocation';
-
-const ISSContext = createContext();
-
-const ShowContext = () => (
-  <ISSContext.Consumer>
-    {(context) => (
-      <span>{`O valor do contexto é ${JSON.stringify(context)}'`}</span>
-    )}
-  </ISSContext.Consumer>
-);
+import ISSContext from './context/ISSContext';
 
 function App() {
   const contextValue = {
@@ -25,7 +16,6 @@ function App() {
       <div className="App">
         <h1>International Space Station Location Tracker</h1>
         <ISSLocation />
-        <ShowContext />
       </div>
     </ISSContext.Provider>
   );
