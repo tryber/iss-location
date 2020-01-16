@@ -54,8 +54,4 @@ class ISSLocation extends Component {
   }
 }
 
-// const mapDispatchToProps = (dispatch) => ({
-//   getCurrentISSLocation: () => dispatch(fetchISSLocation()),
-// });
-
 export default ISSLocation;

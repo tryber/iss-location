@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import ISSLocation from './components/ISSLocation';
 import ISSContext from './context/ISSContext';
+import { getCurrentISSLocation } from './services/issAPI';
 
 class App extends Component {
   constructor(props) {
@@ -12,6 +13,18 @@ class App extends Component {
       latitude: -19.9410656,
       longitude: -43.9333033,
     };
+
+    this.fetchISSLocation = this.fetchISSLocation.bind(this);
+  }
+
+  fetchISSLocation() {
+    const { isFetching } = this.state;
+
+    if (isFetching) return;
+
+    this.setState({ isFetching: true });
+
+    getCurrentISSLocation();
   }
 
   render() {
