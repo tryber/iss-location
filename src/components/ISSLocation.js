@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import Map from 'pigeon-maps';
 import Marker from 'pigeon-marker';
 
-import { fetchISSLocation } from '../actions';
+import ISSContext from '../context/ISSContext';
 
 class ISSLocation extends Component {
   componentDidMount() {
-    const { getCurrentISSLocation } = this.props;
+    const { getCurrentISSLocation } = this.context;
 
     this.timer = setInterval(
       getCurrentISSLocation,
@@ -26,7 +24,7 @@ class ISSLocation extends Component {
       isFetching,
       latitude,
       longitude,
-    } = this.props;
+    } = this.context;
     const isLocationPresent = latitude && longitude;
 
     return (
@@ -37,7 +35,7 @@ class ISSLocation extends Component {
             defaultWidth={700}
             height={450}
             minZoom={1}
-            maxZoom={8}
+            maxZoom={20}
             zoom={1}
           >
             {!isFetching && isLocationPresent && <Marker anchor={[latitude, longitude]} />}
@@ -51,38 +49,6 @@ class ISSLocation extends Component {
   }
 }
 
-const mapStateToProps = ({
-  issLocation: {
-    error,
-    isFetching,
-    latitude,
-    longitude,
-  },
-}) => (
-  {
-    error,
-    isFetching,
-    latitude,
-    longitude,
-  }
-);
+ISSLocation.contextType = ISSContext;
 
-const mapDispatchToProps = (dispatch) => ({
-  getCurrentISSLocation: () => dispatch(fetchISSLocation()),
-});
-
-ISSLocation.propTypes = {
-  error: PropTypes.string,
-  getCurrentISSLocation: PropTypes.func.isRequired,
-  isFetching: PropTypes.bool.isRequired,
-  latitude: PropTypes.number,
-  longitude: PropTypes.number,
-};
-
-ISSLocation.defaultProps = {
-  error: null,
-  latitude: null,
-  longitude: null,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(ISSLocation);
+export default ISSLocation;
