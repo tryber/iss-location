@@ -56,7 +56,7 @@ class App extends Component {
       <ISSContext.Provider value={contextValue}>
         <div className="App">
           <h1>International Space Station Location Tracker</h1>
-          <ISSLocation />
+          <ISSLocation getCurrentISSLocation={this.fetchISSLocation} />
         </div>
       </ISSContext.Provider>
     );
