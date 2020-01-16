@@ -10,11 +10,13 @@ class App extends Component {
     this.state = {
       error: null,
       isFetching: false,
-      latitude: -19.9410656,
-      longitude: -43.9333033,
+      latitude: null,
+      longitude: null,
     };
 
     this.fetchISSLocation = this.fetchISSLocation.bind(this);
+    this.handleISSLocationSuccess = this.handleISSLocationSuccess.bind(this);
+    this.handleISSLocationFailure = this.handleISSLocationFailure.bind(this);
   }
 
   fetchISSLocation() {
@@ -24,7 +26,25 @@ class App extends Component {
 
     this.setState({ isFetching: true });
 
-    getCurrentISSLocation();
+    getCurrentISSLocation()
+      .then(this.handleISSLocationSuccess, this.handleISSLocationFailure);
+  }
+
+  handleISSLocationSuccess(response) {
+    const { iss_position: { latitude, longitude } } = response;
+
+    this.setState({
+      isFetching: false,
+      latitude: parseFloat(latitude),
+      longitude: parseFloat(longitude),
+    });
+  }
+
+  handleISSLocationFailure(error) {
+    this.setState({
+      isFetching: false,
+      error: error.message,
+    });
   }
 
   render() {
