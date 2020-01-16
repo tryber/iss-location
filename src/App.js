@@ -50,13 +50,14 @@ class App extends Component {
   render() {
     const contextValue = {
       ...this.state,
+      getCurrentISSLocation: this.fetchISSLocation,
     };
 
     return (
       <ISSContext.Provider value={contextValue}>
         <div className="App">
           <h1>International Space Station Location Tracker</h1>
-          <ISSLocation getCurrentISSLocation={this.fetchISSLocation} />
+          <ISSLocation />
         </div>
       </ISSContext.Provider>
     );
