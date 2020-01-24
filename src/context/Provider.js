@@ -12,11 +12,13 @@ class Provider extends Component {
       isFetching: false,
       latitude: null,
       longitude: null,
+      showMap: true,
     };
 
     this.fetchISSLocation = this.fetchISSLocation.bind(this);
     this.handleISSLocationSuccess = this.handleISSLocationSuccess.bind(this);
     this.handleISSLocationFailure = this.handleISSLocationFailure.bind(this);
+    this.handleToggleMap = this.handleToggleMap.bind(this);
   }
 
   fetchISSLocation() {
@@ -47,10 +49,15 @@ class Provider extends Component {
     });
   }
 
+  handleToggleMap() {
+    this.setState(({ showMap }) => ({ showMap: !showMap }));
+  }
+
   render() {
     const contextValue = {
       ...this.state,
       getCurrentISSLocation: this.fetchISSLocation,
+      toggleMap: this.handleToggleMap,
     };
     const { children } = this.props;
 
