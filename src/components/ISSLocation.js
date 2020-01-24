@@ -3,6 +3,7 @@ import Map from 'pigeon-maps';
 import Marker from 'pigeon-marker';
 
 import ISSContext from '../context/ISSContext';
+import useTimer from '../effects/useTimer';
 
 function ISSLocation() {
   const {
@@ -14,16 +15,7 @@ function ISSLocation() {
   } = useContext(ISSContext);
   const isLocationPresent = latitude && longitude;
 
-  useEffect(() => {
-    const timer = setInterval(
-      getCurrentISSLocation,
-      2000,
-    );
-
-    return () => {
-      clearInterval(timer);
-    };
-  }, []);
+  useTimer(getCurrentISSLocation, 2000);
 
   useEffect(() => {
     const now = new Date();
