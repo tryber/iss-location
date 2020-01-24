@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Map from 'pigeon-maps';
 import Marker from 'pigeon-marker';
 
@@ -31,7 +31,7 @@ function ISSLocation() {
     isFetching,
     latitude,
     longitude,
-  } = this.context;
+  } = useContext(ISSContext);
   const isLocationPresent = latitude && longitude;
 
   return (
@@ -54,7 +54,5 @@ function ISSLocation() {
     </div>
   );
 }
-
-ISSLocation.contextType = ISSContext;
 
 export default ISSLocation;
