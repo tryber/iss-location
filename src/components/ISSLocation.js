@@ -14,6 +14,11 @@ class ISSLocation extends Component {
     );
   }
 
+  componentDidUpdate() {
+    const now = new Date();
+    document.title = now.toLocaleTimeString();
+  }
+
   componentWillUnmount() {
     clearInterval(this.timer);
   }
