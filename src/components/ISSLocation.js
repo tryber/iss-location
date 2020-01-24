@@ -12,6 +12,9 @@ class ISSLocation extends Component {
       getCurrentISSLocation,
       2000,
     );
+
+    const now = new Date();
+    document.title = now.toLocaleTimeString();
   }
 
   componentDidUpdate() {
