@@ -5,27 +5,6 @@ import Marker from 'pigeon-marker';
 import ISSContext from '../context/ISSContext';
 
 function ISSLocation() {
-  // componentDidMount() {
-  //   const { getCurrentISSLocation } = this.context;
-
-  //   this.timer = setInterval(
-  //     getCurrentISSLocation,
-  //     2000,
-  //   );
-
-  //   const now = new Date();
-  //   document.title = now.toLocaleTimeString();
-  // }
-
-  // componentDidUpdate() {
-  //   const now = new Date();
-  //   document.title = now.toLocaleTimeString();
-  // }
-
-  // componentWillUnmount() {
-  //   clearInterval(this.timer);
-  // }
-
   const {
     error,
     isFetching,
@@ -36,10 +15,14 @@ function ISSLocation() {
   const isLocationPresent = latitude && longitude;
 
   useEffect(() => {
-    setInterval(
+    const timer = setInterval(
       getCurrentISSLocation,
       2000,
     );
+
+    return () => {
+      clearInterval(timer);
+    };
   }, []);
 
   useEffect(() => {
