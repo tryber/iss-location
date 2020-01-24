@@ -42,6 +42,11 @@ function ISSLocation() {
     );
   }, []);
 
+  useEffect(() => {
+    const now = new Date();
+    document.title = now.toLocaleTimeString();
+  });
+
   return (
     <div>
       <div className="map">
