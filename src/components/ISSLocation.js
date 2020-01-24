@@ -40,7 +40,7 @@ function ISSLocation() {
       getCurrentISSLocation,
       2000,
     );
-  });
+  }, []);
 
   return (
     <div>
