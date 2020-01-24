@@ -7,3 +7,11 @@
   margin: 0 auto;
   max-width: 700px;
 }
+
+.people-in-space {
+  margin-top: 50px;
+}
+
+.people-list {
+  list-style-type: none;
+}

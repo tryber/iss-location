@@ -9,4 +9,12 @@ export const getCurrentISSLocation = () => (
     ))
 );
 
+export const getPeopleInSpace = () => (
+  fetch(`${ISS_BASE_API}/astros.json`)
+    .then((response) => (
+      response.json()
+        .then((json) => (response.ok ? Promise.resolve(json) : Promise.reject(json)))
+    ))
+);
+
 export default getCurrentISSLocation;

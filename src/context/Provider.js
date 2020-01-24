@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import ISSContext from './ISSContext';
-import { getCurrentISSLocation } from '../services/issAPI';
+import { getCurrentISSLocation, getPeopleInSpace } from '../services/issAPI';
 
 class Provider extends Component {
   constructor(props) {
@@ -13,12 +13,15 @@ class Provider extends Component {
       latitude: null,
       longitude: null,
       showMap: true,
+      peopleInSpace: undefined,
     };
 
     this.fetchISSLocation = this.fetchISSLocation.bind(this);
     this.handleISSLocationSuccess = this.handleISSLocationSuccess.bind(this);
     this.handleISSLocationFailure = this.handleISSLocationFailure.bind(this);
     this.handleToggleMap = this.handleToggleMap.bind(this);
+    this.fetchNumberOfPeopleInSpace = this.fetchNumberOfPeopleInSpace.bind(this);
+    this.handlePepoleInSpaceSuccess = this.handlePepoleInSpaceSuccess.bind(this);
   }
 
   fetchISSLocation() {
@@ -30,6 +33,10 @@ class Provider extends Component {
 
     getCurrentISSLocation()
       .then(this.handleISSLocationSuccess, this.handleISSLocationFailure);
+  }
+
+  fetchNumberOfPeopleInSpace() {
+    getPeopleInSpace().then(this.handlePepoleInSpaceSuccess);
   }
 
   handleISSLocationSuccess(response) {
@@ -49,6 +56,10 @@ class Provider extends Component {
     });
   }
 
+  handlePepoleInSpaceSuccess(response) {
+    this.setState({ peopleInSpace: response.people });
+  }
+
   handleToggleMap() {
     this.setState(({ showMap }) => ({ showMap: !showMap }));
   }
@@ -58,6 +69,7 @@ class Provider extends Component {
       ...this.state,
       getCurrentISSLocation: this.fetchISSLocation,
       toggleMap: this.handleToggleMap,
+      getPeopleInSpace: this.fetchNumberOfPeopleInSpace,
     };
     const { children } = this.props;
 
