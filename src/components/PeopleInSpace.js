@@ -15,7 +15,7 @@ const PeopleInSpace = () => {
       <span>{`Number of people in space now: ${peopleInSpace.length}`}</span>
       <ul className="people-list">
         {peopleInSpace.map(({ name }) => (
-          <li>{name}</li>
+          <li key={name}>{name}</li>
         ))}
       </ul>
     </div>
